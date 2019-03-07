@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+   <bean id = "cargiant" class = "Cargiant"></bean>
+   <bean id = "carhub" class = "Carhub"></bean>
+   <bean id = "classicCars" class = "Classiccars"></bean>
+   <bean id = "hrowen" class = "Hrowen"></bean>
+   <bean id = "lamborghini" class = "Lamborghini"></bean>
+   
+   <bean id = "scraperManager" class = "ScraperManager">
+      <property name = "cargiant" ref = "cargiant"/>
+      <property name = "carhub" ref = "carhub"/>
+      <property name = "classicCars" ref = "classicCars"/>
+      <property name = "hrowen" ref = "hrowen"/>
+      <property name = "lamborghini" ref = "lamborghini"/>
+   </bean>
+   
+</beans>
+

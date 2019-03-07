@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FindYourNextCar.com</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="stylesheet.css">
+        <!-- Vue development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- Axios library -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    
+    <body>
+       <!--Navbar Control-->
+       <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="index.html"><i class="fa fa-car" style="color: red;"></i> FindYourNextCar.com</a>
+            </div>
+            <div class="col-sm-7 col-md-7" style="margin-top:8px;margin-left: 30px;">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" id="input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" onclick="loadCars()"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="used.html"><i class="fa fa-check-circle-o" style="color: red;"></i> USED AND APPROVED</a></li>
+              <li><a href="contact.html"><i class="fa fa-envelope" style="color: red"></i> CONTACT</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Header with full-height image, search box and social media icons-->
+        <header>
+            <img src="images/car.png" style="margin-top: 6px;">
+            <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+                <h1 style="color:white; margin-bottom: 300px; ">WHERE WILL YOU FIND YOUR NEXT CAR</h1>
+                <i class="fa fa-facebook-official w3-hover-opacity" style="font-size:25px;color:white;"></i>
+                <i class="fa fa-instagram w3-hover-opacity" style="font-size:25px;color:white;"></i>
+                <i class="fa fa-snapchat w3-hover-opacity" style="font-size:25px;color:white;"></i>
+                <i class="fa fa-pinterest-p w3-hover-opacity" style="font-size:25px;color:white;"></i>
+                <i class="fa fa-twitter w3-hover-opacity" style="font-size:25px;color:white;"></i>
+                <i class="fa fa-linkedin w3-hover-opacity" style="font-size:25px;color:white;"></i>
+            </div>
+        </header>
+       <script>
+            
+           var url = '/search?q=';
+
+           var input = document.getElementById("input");
+
+           /** Retreives cars data from web service */
+           function loadCars() {
+               axios.get(url + input.value)//Send GET request to cars path
+                   .then(function (response) {//Request successful
+                       //Output cars data
+                       console.log("---------- Data Received from Web Service -------------");
+                       console.log(JSON.stringify(response.data.cars));
+                   })
+                   .catch(function (error) {
+                       //Handle error
+                       console.log(error);
+                   });
+           }
+       </script>
+        <!--Contains the top selling section-->
+        <div class="container">
+            <div class="row">
+                <h2 style="text-align: center; font-family: Harabara;">TOP VIEWED THIS WEEK</h2>
+                <hr>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card">
+                        <a class="img-card">
+                            <img src="images/bmw.png"/>
+                        </a>
+                        <br />
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                <a href="http://www.findyournextcar.com/">
+                                    BMW M4 COUPE 2018
+                                </a>
+                            </h4>
+                            <div>
+                                London, United Kingdom
+                            </div>
+                        </div>
+                        <div class="card-read-more">
+                            <a class="btn btn-link btn-block" href="http://www.findyournextcar.com/">
+                                VISIT SITE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card">
+                        <a class="img-card" >
+                            <img src="images/audi.jpg"/>
+                        </a>
+                        <br />
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                <a href="http://www.findyournextcar.com/">
+                                    AUDI R8 V12 2018
+                                </a>
+                            </h4>
+                            <div class="">
+                                London, United Kingdom
+                            </div>
+                        </div>
+                        <div class="card-read-more">
+                            <a class="btn btn-link btn-block" href="http://www.findyournextcar.com/">
+                                VISIT SITE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card">
+                        <a class="img-card" >
+                            <img src="images/mercedes.png"/>
+                        </a>
+                        <br />
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                <a href="http://www.findyournextcar.com/">
+                                    MERCEDES C CLASS COUPE
+                                </a>
+                            </h4>
+                            <div class="">
+                                London, United Kingdom
+                            </div>
+                        </div>
+                        <div class="card-read-more">
+                            <a class="btn btn-link btn-block" href="http://www.findyournextcar.com/">
+                                VISIT SITE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-center w3-padding-8" id="usedF">
+          <a href="#" class="w3-button w3-black"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+          <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+          </div>
+        </footer>
+
+    </body>
+</html>

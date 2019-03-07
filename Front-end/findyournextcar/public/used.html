@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FindYourNextCar.com</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="stylesheet.css">
+        <!-- Vue development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- Axios library -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    
+    <body>
+    <div id="app">
+       <!--Navbar Control-->
+       <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="index.html"><i class="fa fa-car" style="color: red;"></i> FindYourNextCar.com</a>
+            </div>
+            <div class="col-sm-6 col-md-6" style="margin-top:8px;margin-left: 30px;">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" id="input">
+                  <div class="input-group-btn">
+                      <button class="btn btn-default" type="submit" v-on:click="search"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+              </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html"><i class="fa fa-search" style="color: red"></i> SEARCH</a></li>
+              <li><a href="used.html"><i class="fa fa-check-circle-o" style="color: red;"></i> USED AND APPROVED</a></li>
+              <li><a href="contact.html"><i class="fa fa-envelope" style="color: red"></i> CONTACT</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <!--Contains all product data-->
+        <div class="container-fluid">
+            <div class="row-content">
+                <h3 style="text-align: center;">Search Results for: </h3>
+                <br>
+                <!--Cars from database-->
+                <div class="col-md-4 productbox" v-for="car in cars">
+                    <img class="img-responsive" :src="car.image_url">
+                    <div class="producttitle" >
+                        {{car.description}} <br>{{car.features}}
+                    </div>
+                    <div class="productprice">
+                        <div class="pull-right">
+                            <a class="btn btn-danger btn-sm" role="button" :href="'http://' + car.domain + car.path">VISIT SITE</a>
+                        </div>
+                        <div class="pricetext">
+                            {{car.price}}
+                        </div>
+                    </div>
+                </div>
+
+                <!--Pagination control-->
+                <h3 style="text-align: center;">Page Number: {{pageNumber+1}} of {{numPages}}</h3>
+                <button class="btn" v-on:click="previousPage" id="previousPageButton"><span class="glyphicon glyphicon-backward"></span></button>
+                <button class="btn" v-on:click="nextPage" id="nextPageButton"><span class="glyphicon glyphicon-forward"></span></button>
+            </div>
+        </div>
+    </div>
+
+       <!--Script to output all cars from database using the GET method-->
+        <script>
+
+            //For loop to print products
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    cars: [],
+                    numPages: 0,
+                    numItemsPerPage: 15,
+                    pageNumber: 0
+                },
+                methods : {
+                    //Get all the cars from the web service using Axios.
+                    loadAllCars: function (){
+
+                        var localApp = this;
+
+                        var offset = this.pageNumber*this.numItemsPerPage;
+
+                        var url = '/cars?offset=' + offset + '&num_items=' + localApp.numItemsPerPage;
+
+                        axios.get(url)//Send GET request to cars path
+                            .then(function (response) {//Request successful
+                                //Point cars in data to return array of cars
+                                localApp.cars = response.data.cars;
+                                console.log(JSON.stringify(response.data.cars));
+
+                                localApp.numPages = Math.ceil(response.data.totNumItems/localApp.numItemsPerPage)
+                            })
+                            .catch(function (error) {
+                                //Handle error
+                                console.log(error);
+                            });
+                    },
+                    //Next page function control
+                    nextPage: function () {
+                        this.pageNumber++;
+
+                        this.loadAllCars();
+
+                        if(this.pageNumber === this.numPages -1)
+                            document.getElementById("nextPageButton").disabled = true;
+                    },
+                    //Previous page function control
+                    previousPage: function () {
+                        this.pageNumber--;
+
+                        this.loadAllCars();
+
+                        if(this.pageNumber === this.numPages -1)
+                            document.getElementById("previousPageButton").disabled = true;
+                    },
+
+                    search: function(){
+
+                        var localApp = this;
+
+                        var url = '/search?q=';
+
+                        var input = document.getElementById("input");
+
+                        /** Retreives cars data from web service */
+                        axios.get(url + input.value)//Send GET request to cars path
+                            .then(function (response) {//Request successful
+                                //Output cars data
+                                localApp.cars = response.data.cars;
+                                console.log("---------- Data Received from Web Service -------------");
+                                console.log(JSON.stringify(response.data.cars));
+
+
+                            })
+                            .catch(function (error) {
+                                //Handle error
+                                console.log(error);
+                            });
+                    }
+                },
+
+                created: function(){//Vue lifecycle hook, called when data is loaded.
+                    //Load cars from web service
+                    this.loadAllCars();
+
+                    //Refresh cars every 5 seconds
+                    setInterval(this.loadAllCars, 5000);
+                }
+            })
+
+        </script>
+
+    </body>
+</html>

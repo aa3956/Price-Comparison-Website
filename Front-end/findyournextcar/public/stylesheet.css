@@ -1,0 +1,124 @@
+
+body,h1,h2,h3,h4,h5,h6 {
+    font-family: Harabara;
+}
+
+#navbar{
+    background-color: white;
+    color: black;
+}
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
+}
+
+/*Row control for products page row*/
+#app{
+    margin-top: 70px;
+}
+
+/*Product control for top selling on index.html*/
+.card {
+  display: block;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    transition: box-shadow .25s;
+}
+.card:hover {
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.img-card {
+  width: 100%;
+  height:200px;
+  border-top-left-radius:2px;
+  border-top-right-radius:2px;
+  display:block;
+    overflow: hidden;
+}
+.img-card img{
+  width: 100%;
+  height: 200px;
+  object-fit:cover;
+  transition: all .25s ease;
+}
+.card-content {
+  padding:15px;
+  text-align:left;
+}
+.card-title {
+  margin-top:0px;
+  font-weight: 700;
+  font-size: 1.65em;
+}
+.card-title a {
+  color: #000;
+  text-decoration: none !important;
+}
+.card-read-more {
+  border-top: 1px solid #D4D4D4;
+}
+.card-read-more a {
+  text-decoration: none !important;
+  padding:10px;
+  font-weight:600;
+  text-transform: uppercase
+}
+
+/*Products from database in used.html control*/
+.productbox {
+    background-color:#ffffff;
+
+    padding:10px;
+    margin-bottom:10px;
+    -webkit-box-shadow: 0 8px 6px -6px  #999;
+    -moz-box-shadow: 0 8px 6px -6px  #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.producttitle {
+    font-weight:bold;
+    padding:5px 0 5px 0;
+}
+
+.productprice {
+    border-top:1px solid #dadada;
+    padding-top:5px;
+}
+
+.pricetext {
+    font-weight:bold;
+    font-size:1.4em;
+}
+
+#previousPageButton{
+    margin-left: 900px;
+    background-color: black;
+    color: white;
+}
+
+#nextPageButton{
+    background-color: black;
+    color: white;
+}
+
+/* Set black background color, white text and some padding */
+.footer {
+    background-color: transparent;
+    color: black;
+    margin-bottom:100px;
+    padding: 15px;
+}
+

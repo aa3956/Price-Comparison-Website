@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Axios Demo</title>
+
+    <!-- Axios library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div>
+        Search:<input type="text" id="input">
+        <button onclick="loadCars()">Submit</button>
+
+    </div>
+    <script>
+        // //Load cereals after window has loaded.
+        // window.onload = loadCars;
+
+        var url = '/search?q=';
+
+        var input = document.getElementById("input");
+
+        /** Retreives cars data from web service */
+        function loadCars() {
+            axios.get(url + input.value)//Send GET request to cars path
+                .then(function (response) {//Request successful
+                    //Output cereals data
+                    console.log("---------- Data Received from Web Service -------------");
+                    console.log(JSON.stringify(response.data.cars));
+                })
+                .catch(function (error) {
+                    //Handle error
+                    console.log(error);
+                });
+        }
+    </script>
+</body>
+</html>
+
+

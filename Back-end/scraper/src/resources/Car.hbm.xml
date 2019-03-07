@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+  <class name="CarXML" table="car">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="image_url" type="string">
+      <column name="image_url"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="features" type="string">
+      <column name="features"/>
+    </property>
+    <property name="price" type="int">
+      <column name="price"/>
+    </property>
+    <property name="urlId" type="int">
+      <column name="url_id"/>
+    </property>
+  </class>
+    
+<!--
+  <class name="CarXML" table="url">
+    <id name="id" type="int">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="domain" type="string">
+      <column name="domain"/>
+    </property>
+    <property name="path" type="string">
+      <column name="path"/>
+    </property>
+    <property name="query_string" type="string">
+      <column name="query_string"/>
+    </property>
+  </class>
+-->
+</hibernate-mapping>
